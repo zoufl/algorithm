@@ -4,9 +4,7 @@ import "testing"
 
 // https://leetcode-cn.com/problems/two-sum/
 
-/**
-哈希表
-*/
+// 哈希表记录元素和index
 func TwoSum(nums []int, target int) []int {
 	hashTable := map[int]int{}
 	for i, num := range nums {
