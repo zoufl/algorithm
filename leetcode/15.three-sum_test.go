@@ -73,11 +73,11 @@ func ThreeSum(nums []int) [][]int {
 			sum := nums[i] + nums[l] + nums[r]
 
 			if sum == 0 {
-				ans = append(ans, []int{i, nums[l], nums[r]})
-				for nums[l] == nums[l+1] {
+				ans = append(ans, []int{nums[i], nums[l], nums[r]})
+				for l < r && nums[l] == nums[l+1] {
 					l++
 				}
-				for nums[r] == nums[r-1] {
+				for l < r && nums[r] == nums[r-1] {
 					r--
 				}
 				l++
