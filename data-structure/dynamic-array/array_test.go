@@ -35,21 +35,21 @@ func (a *Array) IsEmpty() bool {
 	return a.size == 0
 }
 
-func (a *Array) GetSize() int {
+func (a *Array) Size() int {
 	return a.size
 }
 
-func (a *Array) GetCapacity() int {
+func (a *Array) Capacity() int {
 	return a.capacity
 }
 
-func (a *Array) Contains(target interface{}) bool {
+func (a *Array) Contains(item interface{}) bool {
 	if a.IsEmpty() {
 		return false
 	}
 
 	for _, d := range a.data {
-		if d == target {
+		if d == item {
 			return true
 		}
 	}
@@ -58,7 +58,7 @@ func (a *Array) Contains(target interface{}) bool {
 }
 
 func (a *Array) checkIndex(index int) error {
-	if index < 0 || index > a.GetSize() {
+	if index < 0 || index > a.Size() {
 		return errors.New("index out of range error")
 	}
 
@@ -72,7 +72,7 @@ func (a *Array) resize(capacity int) {
 	a.capacity = capacity
 }
 
-func (a *Array) Add(index int, target interface{}) error {
+func (a *Array) Add(index int, item interface{}) error {
 	if err := a.checkIndex(index); err != nil {
 		return err
 	}
@@ -82,22 +82,22 @@ func (a *Array) Add(index int, target interface{}) error {
 	}
 
 	copy(a.data[index+1:], a.data[index:])
-	a.data[index] = target
+	a.data[index] = item
 	a.size++
 
 	return nil
 }
 
-func (a *Array) Append(target interface{}) error {
-	return a.Add(a.size, target)
+func (a *Array) Append(item interface{}) error {
+	return a.Add(a.size, item)
 }
 
-func (a *Array) Set(index int, target interface{}) error {
+func (a *Array) Set(index int, item interface{}) error {
 	if err := a.checkIndex(index); err != nil {
 		return err
 	}
 
-	a.data[index] = target
+	a.data[index] = item
 	return nil
 }
 
@@ -109,9 +109,9 @@ func (a *Array) GetItem(index int) (interface{}, error) {
 	return a.data[index], nil
 }
 
-func (a *Array) FindItem(target interface{}) (int, error) {
+func (a *Array) FindItem(item interface{}) (int, error) {
 	for i, d := range a.data {
-		if d == target {
+		if d == item {
 			return i, nil
 		}
 	}
@@ -119,9 +119,9 @@ func (a *Array) FindItem(target interface{}) (int, error) {
 	return -1, errors.New("no item")
 }
 
-func (a *Array) Delete(target interface{}) bool {
+func (a *Array) Delete(item interface{}) bool {
 	for i, d := range a.data {
-		if d == target {
+		if d == item {
 			copy(a.data[i:], a.data[i+1:])
 			a.size--
 

@@ -7,25 +7,25 @@ import (
 
 // https://leetcode-cn.com/problems/shuffle-an-array/
 
-type Solution struct {
+type ShuffleArray struct {
 	nums, base []int
 }
 
-func Constructor(nums []int) Solution {
-	return Solution{
+func NewShuffleAnArray(nums []int) ShuffleArray {
+	return ShuffleArray{
 		nums: nums,
 		base: append([]int{}, nums...),
 	}
 }
 
-func (s *Solution) Reset() []int {
+func (s *ShuffleArray) Reset() []int {
 	copy(s.nums, s.base)
 
 	return s.nums
 }
 
 // Fisher-Yates 洗牌算法
-func (s *Solution) Shuffle() []int {
+func (s *ShuffleArray) Shuffle() []int {
 	n := len(s.nums)
 
 	for i := range s.nums {
@@ -38,7 +38,7 @@ func (s *Solution) Shuffle() []int {
 
 func TestShuffleAnArray(t *testing.T) {
 	nums := []int{1, 2, 3}
-	s := Constructor(nums)
+	s := NewShuffleAnArray(nums)
 	t.Log(s.Shuffle())
 	t.Log(s.Reset())
 	t.Log(s.Shuffle())
