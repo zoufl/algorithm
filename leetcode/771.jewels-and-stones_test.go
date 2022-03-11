@@ -2,6 +2,8 @@ package leetcode
 
 import "testing"
 
+// https://leetcode-cn.com/problems/jewels-and-stones/
+
 func NumJewelsInStones(jewels string, stones string) int {
 	if len(jewels) == 0 || len(stones) == 0 {
 		return 0
