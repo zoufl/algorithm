@@ -8,14 +8,18 @@ import "testing"
 // 2. 将待排序的元素进行分区，比基准元素大的元素放在它的右边，比基准元素小的放在它的左边
 // 3. 对左右两个分区重复以上步骤，直到所有的元素都是有序的
 
-func QuickSort(nums []int, start, end int) {
+func QuickSort(nums []int) {
+	quickSort(nums, 0, len(nums)-1)
+}
+
+func quickSort(nums []int, start, end int) {
 	if start > end {
 		return
 	}
 
 	pivotIndex := partition(nums, start, end)
-	QuickSort(nums, start, pivotIndex-1)
-	QuickSort(nums, pivotIndex+1, end)
+	quickSort(nums, start, pivotIndex-1)
+	quickSort(nums, pivotIndex+1, end)
 }
 
 func partition(nums []int, start, end int) int {
@@ -43,13 +47,13 @@ func partition(nums []int, start, end int) int {
 
 func TestQuickSort(t *testing.T) {
 	nums := []int{5, 8, 6, 3, 9, 2, 1, 7}
-	QuickSort(nums, 0, len(nums)-1)
+	QuickSort(nums)
 	t.Log(nums)
 }
 
 func BenchmarkQuickSort(b *testing.B) {
 	nums := []int{5, 8, 6, 3, 9, 2, 1, 7}
 	for i := 0; i < b.N; i++ {
-		QuickSort(nums, 0, len(nums)-1)
+		QuickSort(nums)
 	}
 }
