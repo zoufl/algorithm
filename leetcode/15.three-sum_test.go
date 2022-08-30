@@ -62,6 +62,7 @@ func ThreeSum(nums []int) [][]int {
 			break
 		}
 
+		// 排除相同数
 		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
