@@ -9,19 +9,25 @@ import (
 
 // 使用栈
 func IsValidParentheses(s string) bool {
-	stack := make([]rune, 0)
-	m := make(map[rune]rune)
-	m['('] = ')'
-	m['{'] = '}'
-	m['['] = ']'
+	parentheses := map[byte]byte{
+		'(': ')',
+		'{': '}',
+		'[': ']',
+	}
+	stack := make([]byte, 0)
 
-	for _, c := range s {
-		if '(' == c || '{' == c || '[' == c {
-			stack = append(stack, c)
-		} else if len(stack) > 0 && m[stack[len(stack)-1]] == c {
-			stack = stack[:len(stack)-1]
+	for i := 0; i < len(s); i++ {
+		ch := s[i]
+
+		if ch == '(' || ch == '{' || ch == '[' {
+			stack = append(stack, ch)
 		} else {
-			return false
+			n := len(stack)
+			if n == 0 || parentheses[stack[n-1]] != ch {
+				return false
+			}
+
+			stack = stack[:n-1]
 		}
 	}
 
