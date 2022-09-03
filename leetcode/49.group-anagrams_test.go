@@ -18,10 +18,6 @@ func GroupAnagrams(strs []string) [][]string {
 		})
 		sortedStr := string(s)
 
-		//r := strings.Split(str, "")
-		//sort.Strings(r)
-		//s := strings.Join(r, "")
-
 		if _, ok := m[sortedStr]; ok {
 			m[sortedStr] = append(m[sortedStr], str)
 		} else {
